@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udagram-frontend
+  labels:
+    app: udagram-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: udagram-frontend
+  template:
+    metadata:
+      labels:
+        app: udagram-frontend
+    spec:
+      containers:
+      - name: udagram-frontend
+        image: ucheg6/udagram-frontend:v3
+        envFrom: 
+          - configMapRef:
+              name: udagram-env
+          - secretRef:
+              name: udagram-secrets
+          - secretRef:
+              name: udagram-aws-secrets 
+              
